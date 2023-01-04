@@ -1,0 +1,77 @@
+{
+  // 使用 IntelliSense 了解相关属性。 
+  // 悬停以查看现有属性的描述。
+  // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch Current File",
+      "request": "launch",
+      "mainClass": "${file}"
+    },
+    {
+      "type": "java",
+      "name": "Launch MainApp",
+      "request": "launch",
+      "mainClass": "app.MainApp",
+      "projectName": "world1"
+    },
+    {
+      "type": "java",
+      "name": "Launch UtilApp",
+      "request": "launch",
+      "mainClass": "app.UtilApp",
+      "projectName": "world1"
+    },
+    {
+      "type": "java",
+      "name": "Launch Example1",
+      "request": "launch",
+      "mainClass": "temp.example.Example1",
+      "projectName": "world1"
+    },
+    {
+      "type": "java",
+      "name": "Launch MyDraggableComponent",
+      "request": "launch",
+      "mainClass": "temp.example.MyDraggableComponent",
+      "projectName": "world1"
+    },
+    {
+      "type": "java",
+      "name": "Launch ResizableComponentEx",
+      "request": "launch",
+      "mainClass": "temp.example.ResizableComponentEx",
+      "projectName": "world1"
+    },
+    {
+      "type": "java",
+      "name": "Launch Test",
+      "request": "launch",
+      "mainClass": "temp.example.Test",
+      "projectName": "world1"
+    },
+    {
+      "type": "java",
+      "name": "Launch Temp1",
+      "request": "launch",
+      "mainClass": "temp.tools.Temp1",
+      "projectName": "world1"
+    },
+    {
+      "type": "java",
+      "name": "Launch Temp2",
+      "request": "launch",
+      "mainClass": "temp.tools.Temp2",
+      "projectName": "world1"
+    },
+    {
+      "type": "java",
+      "name": "Launch Temp3",
+      "request": "launch",
+      "mainClass": "temp.tools.Temp3",
+      "projectName": "world1"
+    }
+  ]
+}
