@@ -14,19 +14,19 @@ public class Chunk extends GameEntity{
     FLOAT_TO_ASICC_MAX=(1<<7),FLOAT_TO_ASICC_MIN=(1<<5);
   World w;
   Vec2i pos;
-  WordRect[][] data;
+  CharRect[][] data;
   ChunkProvider parent;
   public Chunk(UtilApp p,UtilAppPage page,World world,int x,int y,int wIn,int h) {
     super(p,page);
     this.w=world;
     parent=world.chunkProvider;
     pos=new Vec2i(x,y);
-    data=new WordRect[h][wIn];
+    data=new CharRect[h][wIn];
   }
   public boolean intersects(float x,float y,float w,float h) {
     return Tools.intersects(pos.x,pos.y,data[0].length,data.length,x,y,w,h);
   }
-  public WordRect getRect(int x,int y) {
+  public CharRect getRect(int x,int y) {
     return data[y-pos.y][x-pos.x];
   }
   public boolean inBox(int a,int b) {
@@ -36,19 +36,19 @@ public class Chunk extends GameEntity{
   public void init() {
     for(int i=0;i<data.length;i++) {
       for(int j=0;j<data[i].length;j++) {
-        if(data[i][j]==null) data[i][j]=new WordRect(
+        if(data[i][j]==null) data[i][j]=new CharRect(
           this,(char)(PApplet.map(
             parent.noise.get((pos.x+j)/8f,(pos.y+i)/8f),
             //            0,1,FLOAT_TO_ASICC_MIN,FLOAT_TO_ASICC_MAX)),
             0,1,0,FLOAT_TO_CHAR)),
-          false,WordRect.LIFE_SIZE);
+          false,CharRect.LIFE_SIZE);
       }
     }
   }
   @Override
   public void update() {
-    for(WordRect[] wordRects:data) {
-      for(WordRect wordRect:wordRects) {
+    for(CharRect[] wordRects:data) {
+      for(CharRect wordRect:wordRects) {
         wordRect.addLife(0.001953125f*PApplet.pow(wordRect.getData(),0.125f)*4);
       }
     }
@@ -59,7 +59,7 @@ public class Chunk extends GameEntity{
     p.rect(pos.x*w.rectUnit,pos.y*w.rectUnit,w.rectUnit*data[0].length,w.rectUnit*data.length);
     for(int i=0;i<data.length;i++) {
       for(int j=0;j<data[i].length;j++) {
-        WordRect word;
+        CharRect word;
         if((word=data[i][j]).getData()==0) continue;
         float x=j+0.5f+pos.x,y=i+0.5f+pos.y,z;
         float tw=(p.width/w.cam.scale)/w.rectUnit,th=(p.height/w.cam.scale)/w.rectUnit;
@@ -69,8 +69,8 @@ public class Chunk extends GameEntity{
           tw+2,th+2)&&
           (z=PApplet.dist(w.me.point.pos.x,w.me.point.pos.y,x,y))<16) {
           if(word.getLife()>0) {
-            if(word.getLife()!=WordRect.LIFE_SIZE) {
-              float temp=w.rectUnit*word.getLife()/WordRect.LIFE_SIZE;
+            if(word.getLife()!=CharRect.LIFE_SIZE) {
+              float temp=w.rectUnit*word.getLife()/CharRect.LIFE_SIZE;
               p.fill(0);
               p.rect(
                 (j+pos.x)*w.rectUnit,
@@ -91,7 +91,7 @@ public class Chunk extends GameEntity{
               y*w.rectUnit-page.textDescent);
           }else {
             p.noFill();
-            float ts=PApplet.map(PApplet.sq(word.getLife()),PApplet.sq(WordRect.N_LIFE_SIZE),0,w.rectUnit,0);
+            float ts=PApplet.map(PApplet.sq(word.getLife()),PApplet.sq(CharRect.N_LIFE_SIZE),0,w.rectUnit,0);
             if(ts>p.g.strokeWeight/2) p.ellipse(x*w.rectUnit,y*w.rectUnit,ts,ts);
             else p.point(x*w.rectUnit,y*w.rectUnit);
             for(int a=0;a<4;a++) {

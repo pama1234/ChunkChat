@@ -48,7 +48,7 @@ public class World extends GameEntity{
     //    shipRemoved=new LinkedList<Ship>();
     shipProvider=new ShipProvider(p,page,p.sketchPath()+"/data/saved/player/",this);
   }
-  public WordRect getRect(int x,int y) {
+  public CharRect getRect(int x,int y) {
     for(Chunk c:chunkList) if(c.inBox(x,y)) return c.getRect(x,y);
     return null;
   }

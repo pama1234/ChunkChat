@@ -26,9 +26,9 @@ public class ShipProvider extends GameEntity{
   }
   public void saveShip(Ship in) {
     cache.add(in);
-    while(cacheSize<cache.size()) save(cache.removeFirst());
+    while(cacheSize<cache.size()) innerSave(cache.removeFirst());
   }
-  private void save(Ship in) {
+  public void innerSave(Ship in) {
     if(DEBUG_MODE) return;
     byte[] out=new byte[saveByteCache.size()];
     for(int i=0;i<out.length;i++) out[i]=saveByteCache.get(i);
@@ -40,11 +40,11 @@ public class ShipProvider extends GameEntity{
       cache.remove(s);
       return s;
     }
-    Ship out=load(in);
+    Ship out=innerLoad(in);
     out.init();
     return out;
   }
-  private Ship load(String in) {
+  public Ship innerLoad(String in) {
     Ship out=new Ship(p,page,parent,parent.text,in,debugCount++,0,0);
     if(DEBUG_MODE) return out;
     return null;

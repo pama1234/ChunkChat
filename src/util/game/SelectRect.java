@@ -22,7 +22,7 @@ public class SelectRect extends GameEntity{
     SCALE_FACTOR=1;
   public Ship parent;
   public PathPoint point;
-  public WordRect subject;
+  public CharRect subject;
   public int cooling;
   public boolean mouseAuto;
   public SelectRect(UtilApp p,UtilAppPage page,Ship parent) {
@@ -78,7 +78,7 @@ public class SelectRect extends GameEntity{
     subject=parent.w.getRect(getX(),getY());
     if(PApplet.dist(point.pos.x,point.pos.y,point.des.x,point.des.y)<0.5f&&subject!=null&&p.mousePressed&&cooling<=0) {
       if(p.mouseButton==PConstants.LEFT) {
-        boolean tf=subject.getLife()>WordRect.N_LIFE_SIZE&&subject.getData()!=0;
+        boolean tf=subject.getLife()>CharRect.N_LIFE_SIZE&&subject.getData()!=0;
         if(tf) {
           subject.addLife(-1);
           cooling=COOLING_SIZE;
@@ -107,7 +107,7 @@ public class SelectRect extends GameEntity{
           //          else tf=true;
           //          if(mouseAuto&&(!tf||subject.getData()!=0)) moveMouse(tx,ty);
         }else {
-          boolean tf=subject.getLife()<WordRect.LIFE_SIZE&&subject.getData()!=0;
+          boolean tf=subject.getLife()<CharRect.LIFE_SIZE&&subject.getData()!=0;
           if(tf) {
             subject.addLife(1);
             cooling=COOLING_SIZE;

@@ -49,12 +49,12 @@ public class ChunkProvider extends GameEntity{
         int tx=temp[i+6],ty=temp[i+5];
         switch(temp[i]) {
           case CHAR_TYPE:
-            out.data[tx][ty]=new WordRect(
+            out.data[tx][ty]=new CharRect(
               out,getChar(temp[i+1],temp[i+2]),
               true,temp[i+3]+(temp[i+4]&0xff)/128f);
             break;
           case LIFE_TYPE:
-            out.data[tx][ty]=new WordRect(
+            out.data[tx][ty]=new CharRect(
               out,getChar(temp[i+1],temp[i+2]),
               false,temp[i+3]+(temp[i+4]&0xff)/128f);
             break;
@@ -70,7 +70,7 @@ public class ChunkProvider extends GameEntity{
     if(DEBUG_MODE) return;
     for(int i=0;i<in.data.length;i++) {
       for(int j=0;j<in.data[i].length;j++) {
-        WordRect w=in.data[i][j];
+        CharRect w=in.data[i][j];
         if(w.isChanged()) {
           saveByteCache.add(CHAR_TYPE);
           //---
@@ -82,7 +82,7 @@ public class ChunkProvider extends GameEntity{
           //---
           saveByteCache.add((byte)(j&0xff));
           saveByteCache.add((byte)(i&0xff));
-        }else if(w.getLife()!=WordRect.LIFE_SIZE) {
+        }else if(w.getLife()!=CharRect.LIFE_SIZE) {
           saveByteCache.add(LIFE_TYPE);
           //---
           saveByteCache.add((byte)((w.getData()>>>8)&0xff));
