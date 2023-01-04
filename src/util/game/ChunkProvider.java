@@ -32,15 +32,15 @@ public class ChunkProvider extends GameEntity{
       cache.remove(c);
       return c;
     }
-    Chunk out=load(x,y,w,h);
+    Chunk out=innerLoad(x,y,w,h);
     out.init();
     return out;
   }
   public void saveChunk(Chunk in) {
     cache.add(in);
-    while(cacheSize<cache.size()) save(cache.removeFirst());
+    while(cacheSize<cache.size()) innerSave(cache.removeFirst());
   }
-  private Chunk load(int x,int y,int w,int h) {
+  public Chunk innerLoad(int x,int y,int w,int h) {
     Chunk out=new Chunk(parent.p,parent.page,parent,x,y,w,h);
     if(DEBUG_MODE) return out;
     byte[] temp=p.loadBytes(path+"r."+x+"."+y+"."+w+"."+h+".bytes");
@@ -63,7 +63,7 @@ public class ChunkProvider extends GameEntity{
     }
     return out;
   }
-  private void save(Chunk in) {
+  public void innerSave(Chunk in) {
     if(DEBUG_MODE) return;
     for(int i=0;i<in.data.length;i++) {
       for(int j=0;j<in.data[i].length;j++) {
@@ -82,7 +82,7 @@ public class ChunkProvider extends GameEntity{
         }else if(w.getLife()!=WordRect.LIFE_SIZE) {
           saveByteCache.add(LIFE_TYPE);
           //---
-          saveByteCache.add((byte)(w.getData()>>>8));
+          saveByteCache.add((byte)((w.getData()>>>8)&0xff));
           saveByteCache.add((byte)(w.getData()&0xff));
           //---
           saveByteCache.add((byte)((int)w.getLife()&0xff));
@@ -111,7 +111,7 @@ public class ChunkProvider extends GameEntity{
   public void start() {}
   @Override
   public void end() {
-    for(Chunk c:cache) save(c);
+    for(Chunk c:cache) innerSave(c);
     cache.clear();
   }
   @Override

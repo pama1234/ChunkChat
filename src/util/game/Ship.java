@@ -60,8 +60,8 @@ public class Ship extends GameEntity{
     if(control[4]||cooling>0) {
       p.fill(cooling/60f*255,0,0);
       p.rect(
-        (point.pos.x-0.125f+p.random(-cooling,cooling)/960)*w.rectUnit,
-        (point.pos.y-0.125f+p.random(-cooling,cooling)/960)*w.rectUnit,
+        (point.pos.x-0.125f+p.random(-cooling,cooling)/1920f)*w.rectUnit,
+        (point.pos.y-0.125f+p.random(-cooling,cooling)/1920f)*w.rectUnit,
         w.rectUnit/4,w.rectUnit/4);
     }
     p.stroke(0);
